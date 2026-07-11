@@ -1,1 +1,1 @@
-# Projeto_final_prog2
+# Projeto Final — Programação de Computaores II (2026.2)
