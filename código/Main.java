@@ -23,13 +23,13 @@ public class Main {
     private static Venda vendaAtual = null;
 
     public static void main(String[] args) {
-        // Usuário administrador inicial (para o primeiro acesso ao sistema)
-        usuarios.add(new Gerente("Administrador", "00000000000", "admin", 1, true));
+        inicializarDadosDemo();
 
         System.out.println("=====================================");
         System.out.println("      SISTEMA DE MERCADO - MENU");
         System.out.println("=====================================");
-        System.out.println("Login inicial -> CPF: 00000000000 | Senha: admin\n");
+        System.out.println("Login GERENTE  -> CPF: 00000000000 | Senha: admin");
+        System.out.println("Login OPERADOR -> CPF: 22222222222 | Senha: senha123\n");
 
         boolean executando = true;
         while (executando) {
@@ -43,6 +43,36 @@ public class Main {
         }
 
         System.out.println("\nSistema encerrado. Até logo!");
+    }
+
+    // =========================================================
+    // DADOS INICIAIS (usuários e produtos de demonstração)
+    // =========================================================
+    private static void inicializarDadosDemo() {
+        // Usuários
+        Gerente gerenteInicial = new Gerente("Administrador", "00000000000", "admin", 1, true);
+        OperadorCaixa operadorInicial = new OperadorCaixa("Carlos Lima", "22222222222", "senha123", 1);
+        usuarios.add(gerenteInicial);
+        usuarios.add(operadorInicial);
+
+        // Produtos já cadastrados no estoque
+        Produto arroz = new Produto("Arroz 5kg", 25.90, "Arroz tipo 1", 0);
+        Produto feijao = new Produto("Feijão 1kg", 8.50, "Feijão carioca", 0);
+        Produto oleo = new Produto("Óleo de Soja 900ml", 6.79, "Óleo de soja refinado", 0);
+        Produto acucar = new Produto("Açúcar 1kg", 4.50, "Açúcar refinado", 0);
+        Produto leite = new Produto("Leite 1L", 5.29, "Leite integral", 0);
+
+        empresa.adicionarProduto(arroz);
+        empresa.adicionarProduto(feijao);
+        empresa.adicionarProduto(oleo);
+        empresa.adicionarProduto(acucar);
+        empresa.adicionarProduto(leite);
+
+        arroz.adicionarEstoque(50);
+        feijao.adicionarEstoque(80);
+        oleo.adicionarEstoque(40);
+        acucar.adicionarEstoque(60);
+        leite.adicionarEstoque(100);
     }
 
     // =========================================================
