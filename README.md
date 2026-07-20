@@ -60,8 +60,6 @@ Projeto_final_prog2/
 — **Interface e polimorfismo:** `FormaPagamento` define o contrato `realizarPagamento(Pagamento)`, implementado de forma distinta por `Cartao`, `Pix` e `Dinheiro`.  
 — **Composição:** `Venda` é composta por um `Carrinho`, que por sua vez agrega vários `ItemCarrinho`; `Empresa` mantém a lista de `Produto` disponíveis para venda.  
 
-O diagrama de sequência do fluxo de venda está disponível em [`diagramas/Diagrama_Sequencia_Venda.png`](diagramas/Diagrama_Sequencia_Venda.png).
-
 ## Usuários de demonstração
 
 O sistema já inicia com dois usuários e cinco produtos cadastrados, para facilitar os testes:
