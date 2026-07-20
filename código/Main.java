@@ -85,8 +85,6 @@ public class Main {
         String cpf = lerTexto("CPF: ");
         String senha = lerTexto("Senha: ");
 
-        // Localiza primeiro o usuário pelo CPF, para chamar fazerLogin() só nele
-        // (evita imprimir "credenciais inválidas" para todos os outros usuários da lista)
         Usuario candidato = null;
         for (Usuario usuario : usuarios) {
             if (usuario.getCpf().equals(cpf)) {
