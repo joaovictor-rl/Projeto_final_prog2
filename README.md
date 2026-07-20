@@ -6,6 +6,16 @@ Sistema de **caixa/mercado (PDV)** em Java, desenvolvido em console, aplicando o
 
 O sistema simula o dia a dia de um pequeno mercado: gerentes cadastram produtos e funcionários, e operadores de caixa realizam vendas, aplicam descontos, processam pagamentos e emitem recibos, com baixa automática de estoque.
 
+## Como compilar e executar
+
+Com o java instalado, abra o terminal na pasta `PDVMercado` e execute (utilize o Git Bash no Windows):
+
+```bash
+mkdir -p bin
+javac -encoding UTF-8 -d bin $(find src -name "*.java")
+java -cp bin Main
+```
+
 ## Funcionalidades
 
 ### Gerente
