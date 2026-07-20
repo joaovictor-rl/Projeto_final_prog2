@@ -75,3 +75,4 @@ O sistema já inicia com dois usuários e cinco produtos cadastrados, para facil
 Os diagramas desenvolvidos ao decorrer do projeto estão disponíveis na pasta `diagramas\`:
 * `diagramas/Diagrama_Sequencia_Venda.png`;
 * `diagramas/diagrama_caso_de_uso.png`;
+* `diagramas/diagrama_de_atividades.drawio.png`;
