@@ -70,3 +70,8 @@ O sistema já inicia com dois usuários e cinco produtos cadastrados, para facil
 1. Faça login como **Gerente** ou **Operador de Caixa**.
 2. Como gerente: cadastre produtos/funcionários ou acompanhe o estoque e as vendas.
 3. Como operador: inicie uma venda, adicione produtos ao carrinho, aplique desconto (se houver), registre o pagamento e finalize a venda — o estoque é atualizado automaticamente.
+
+## Diagramas utilizados
+Os diagramas desenvolvidos ao decorrer do projeto estão disponíveis na pasta `diagramas\`:
+* `diagramas/Diagrama_Sequencia_Venda.png`;
+* `diagramas/diagrama_caso_de_uso.png`;
