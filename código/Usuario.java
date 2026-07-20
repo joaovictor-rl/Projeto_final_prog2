@@ -17,7 +17,6 @@ public abstract class Usuario {
         return cpf;
     }
 
-    /** + fazerLogin(login, senha): boolean */
     public boolean fazerLogin(String login, String senha) {
         boolean autenticado = this.cpf.equals(login) && this.senha.equals(senha);
         if (autenticado) {
@@ -28,7 +27,6 @@ public abstract class Usuario {
         return autenticado;
     }
 
-    /** + alterarSenha(novaSenha): void */
     public void alterarSenha(String novaSenha) {
         this.senha = novaSenha;
         System.out.println("[OK] Senha de " + nome + " alterada com sucesso.");

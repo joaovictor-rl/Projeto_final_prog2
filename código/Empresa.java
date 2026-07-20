@@ -24,7 +24,7 @@ public class Empresa {
         return total;
     }
 
-    /** + listarProdutos(): void */
+
     public void listarProdutos() {
         System.out.println("\n----- Produtos cadastrados -----");
         if (listaProdutos.isEmpty()) {
@@ -37,7 +37,6 @@ public class Empresa {
         System.out.println("---------------------------------\n");
     }
 
-    /** + adicionarProduto(Produto): void */
     public void adicionarProduto(Produto produto) {
         if (listaProdutos.size() >= capacidade) {
             throw new IllegalStateException("Capacidade máxima de produtos atingida.");
@@ -46,7 +45,6 @@ public class Empresa {
         System.out.println("[OK] Produto '" + produto.getNome() + "' cadastrado.");
     }
 
-    /** + deletarProduto(Produto): void */
     public void deletarProduto(Produto produto) {
         if (listaProdutos.remove(produto)) {
             System.out.println("[OK] Produto '" + produto.getNome() + "' removido.");

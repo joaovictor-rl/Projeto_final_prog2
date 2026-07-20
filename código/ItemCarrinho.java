@@ -21,12 +21,10 @@ public class ItemCarrinho {
         return quantidade;
     }
 
-    /** + calcularSubtotal(): double */
     public double calcularSubtotal() {
         return precoUnitario * quantidade;
     }
 
-    /** + atualizarQuantidade: void */
     public void atualizarQuantidade(int novaQuantidade) {
         if (novaQuantidade < 0) {
             throw new IllegalArgumentException("Quantidade inválida.");
@@ -34,12 +32,11 @@ public class ItemCarrinho {
         this.quantidade = novaQuantidade;
     }
 
-    /** + incrementarQuantidade: void */
     public void incrementarQuantidade(int incremento) {
         this.quantidade += incremento;
     }
 
-    /** + decrementarQuantidade: void */
+
     public void decrementarQuantidade(int decremento) {
         if (this.quantidade - decremento < 0) {
             throw new IllegalArgumentException("Quantidade não pode ficar negativa.");

@@ -37,7 +37,6 @@ public class Produto {
         return status;
     }
 
-    /** + atualizarPreco(novoPreco: double): void */
     public void atualizarPreco(double novoPreco) {
         if (novoPreco < 0) {
             throw new IllegalArgumentException("O preço não pode ser negativo.");
@@ -46,7 +45,6 @@ public class Produto {
         System.out.printf("[OK] Preço de '%s' atualizado para R$ %.2f.%n", nome, novoPreco);
     }
 
-    /** + adicionarEstoque(quantidade: int): void */
     public void adicionarEstoque(int quantidade) {
         if (quantidade < 0) {
             throw new IllegalArgumentException("Quantidade inválida.");
@@ -56,7 +54,6 @@ public class Produto {
                 nome, quantidade, quantidadeEstoque);
     }
 
-    /** + baixarEstoque(quantidade: int): void */
     public void baixarEstoque(int quantidade) {
         if (quantidade > this.quantidadeEstoque) {
             throw new IllegalStateException("Estoque insuficiente de '" + nome + "'.");

@@ -10,7 +10,6 @@ public class Dinheiro implements FormaPagamento {
         return realizarPagamento(pagamento, pagamento.getValorTotal());
     }
 
-    /** Sobrecarga para informar o valor recebido em espécie */
     public boolean realizarPagamento(Pagamento pagamento, double valorRecebido) {
         if (valorRecebido < pagamento.getValorTotal()) {
             System.out.println("[ERRO] Valor recebido insuficiente.");

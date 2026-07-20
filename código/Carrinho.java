@@ -16,7 +16,6 @@ public class Carrinho {
         return listaItens;
     }
 
-    /** + adicionarItem(Produto, quantidade): void */
     public void adicionarItem(Produto produto, int quantidade) {
         for (ItemCarrinho item : listaItens) {
             if (item.getProduto() == produto) {
@@ -29,7 +28,6 @@ public class Carrinho {
         System.out.println("[OK] '" + produto.getNome() + "' adicionado ao carrinho (x" + quantidade + ").");
     }
 
-    /** + removerItem(Produto): void */
     public void removerItem(Produto produto) {
         for (ItemCarrinho item : new ArrayList<>(listaItens)) {
             if (item.getProduto() == produto) {
@@ -41,7 +39,6 @@ public class Carrinho {
         System.out.println("[ERRO] '" + produto.getNome() + "' não está no carrinho.");
     }
 
-    /** + calcularSubtotal(): double */
     public double calcularSubtotal() {
         double total = 0.0;
         for (ItemCarrinho item : listaItens) {
@@ -50,7 +47,6 @@ public class Carrinho {
         return total;
     }
 
-    /** + esvaziarCarrinho(): void */
     public void esvaziarCarrinho() {
         listaItens.clear();
         System.out.println("[OK] Carrinho esvaziado.");

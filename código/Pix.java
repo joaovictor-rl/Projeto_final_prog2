@@ -5,7 +5,6 @@ public class Pix implements FormaPagamento {
         this.pixCobranca = "";
     }
 
-    /** - gerarPixCobranca(pagamento): boolean */
     private boolean gerarPixCobranca(Pagamento pagamento) {
         this.pixCobranca = "PIX-" + System.nanoTime();
         System.out.println("[PIX] Cobrança gerada: " + pixCobranca);

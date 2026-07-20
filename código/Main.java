@@ -1,17 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
-/**
- * Sistema de Mercado - Menu principal (console).
- *
- * Demonstra os pilares de POO usados no diagrama:
- *  - Herança: Usuario (abstrata) -> Gerente / OperadorCaixa
- *  - Interface / Polimorfismo: FormaPagamento -> Cartao / Pix / Dinheiro
- *  - Encapsulamento: atributos privados com getters/setters em todas as classes
- *  - Composição: Venda possui um Carrinho; Carrinho possui ItemCarrinho(s)
- */
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -50,17 +40,17 @@ public class Main {
     // =========================================================
     private static void inicializarDadosDemo() {
         // Usuários
-        Gerente gerenteInicial = new Gerente("Administrador", "00000000000", "admin", 1, true);
-        OperadorCaixa operadorInicial = new OperadorCaixa("Carlos Lima", "22222222222", "senha123", 1);
+        Gerente gerenteInicial = new Gerente("Administrador Teste Oliveira", "00000000000", "admin", 1, true);
+        OperadorCaixa operadorInicial = new OperadorCaixa("Teste da Silva", "22222222222", "senha123", 1);
         usuarios.add(gerenteInicial);
         usuarios.add(operadorInicial);
 
         // Produtos já cadastrados no estoque
         Produto arroz = new Produto("Arroz 5kg", 25.90, "Arroz tipo 1", 0);
         Produto feijao = new Produto("Feijão 1kg", 8.50, "Feijão carioca", 0);
-        Produto oleo = new Produto("Óleo de Soja 900ml", 6.79, "Óleo de soja refinado", 0);
+        Produto oleo = new Produto("Óleo de Soja 900ml", 6.50, "Óleo de soja refinado", 0);
         Produto acucar = new Produto("Açúcar 1kg", 4.50, "Açúcar refinado", 0);
-        Produto leite = new Produto("Leite 1L", 5.29, "Leite integral", 0);
+        Produto leite = new Produto("Leite 1L", 7.90, "Leite integral", 0);
 
         empresa.adicionarProduto(arroz);
         empresa.adicionarProduto(feijao);
@@ -216,10 +206,10 @@ public class Main {
     private static void menuOperador(OperadorCaixa operador) {
         System.out.println("----- MENU OPERADOR DE CAIXA (" + operador.getNome() + ") -----");
         if (vendaAtual == null) {
-            System.out.println("(nenhuma venda em aberto)");
+            System.out.println("(Nenhuma venda em aberto! Selecione 1)");
         } else {
-            System.out.printf("Venda #%d em aberto | Subtotal: R$ %.2f%n",
-                    vendaAtual.getId(), vendaAtual.getCarrinho().calcularSubtotal());
+            System.out.printf("Venda #%d em aberto | Total: R$ %.2f | Desconto aplicado: R$ %.2f%n",
+                    vendaAtual.getId(), vendaAtual.getTotal(), vendaAtual.getDesconto());
         }
         System.out.println("1 - Iniciar nova venda");
         System.out.println("2 - Registrar item na venda");
@@ -256,11 +246,20 @@ public class Main {
                 else System.out.println("[ERRO] Nenhuma venda em aberto.\n");
                 break;
             case 7:
-                if (vendaAtual != null) {
+                if (vendaAtual == null) {
+                    System.out.println("[ERRO] Nenhuma venda em aberto.\n");
+
+                } else if (vendaAtual.getPagamento() == null || !vendaAtual.getPagamento().getStatus()) {
+                    System.out.println("[ERRO] Pagamento ainda não realizado.\n");
+                } else {
+                    for (ItemCarrinho item : vendaAtual.getCarrinho().getListaItens()) {
+                        Produto p = item.getProduto();
+                        int qtdVendida = item.getQuantidade();
+                        p.baixarEstoque(qtdVendida);
+                    }
                     operador.finalizarVenda(vendaAtual);
                     vendaAtual = null;
-                } else {
-                    System.out.println("[ERRO] Nenhuma venda em aberto.\n");
+                    System.out.println("[OK] Venda finalizada e estoque atualizado com sucesso!");
                 }
                 System.out.println();
                 break;
@@ -284,13 +283,21 @@ public class Main {
         }
         Produto produto = selecionarProduto();
         if (produto == null) return;
-        int quantidade = lerInt("Quantidade: ");
-        operador.registrarItem(vendaAtual, produto, quantidade);
-        try {
-            produto.baixarEstoque(quantidade);
-        } catch (RuntimeException e) {
-            System.out.println("[AVISO] " + e.getMessage());
+        int quantidadeDesejada = lerInt("Quantidade: ");
+        int qtdJaNoCarrinho = 0;
+        for (ItemCarrinho item : vendaAtual.getCarrinho().getListaItens()) {
+            if (item.getProduto() == produto) {
+                qtdJaNoCarrinho = item.getQuantidade();
+                break;
+            }
         }
+        int totalNecessario = quantidadeDesejada + qtdJaNoCarrinho;
+        if (produto.getQuantidadeEstoque() < totalNecessario) {
+            System.out.println("[ERRO] Estoque insuficiente! Você tem " + produto.getQuantidadeEstoque() +
+                    " em estoque, mas a venda exige " + totalNecessario + ".\n");
+            return;
+        }
+        operador.registrarItem(vendaAtual, produto, quantidadeDesejada);
         System.out.println();
     }
 
@@ -330,7 +337,6 @@ public class Main {
         System.out.println("3 - Dinheiro");
         int opcao = lerInt("Escolha: ");
 
-        // Polimorfismo: cada implementação de FormaPagamento trata o pagamento à sua maneira
         FormaPagamento forma;
         Pagamento pagamento;
         boolean sucesso;

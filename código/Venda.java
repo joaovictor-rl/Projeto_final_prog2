@@ -6,6 +6,7 @@ public class Venda {
     private int id;
     private LocalDate data;
     private double total;
+    private double desconto;
     private String status;
     private String recibo;
     private Pagamento pagamento;
@@ -15,10 +16,12 @@ public class Venda {
         this.id = proximoId++;
         this.data = LocalDate.now();
         this.total = 0.0;
+        this.desconto = 0.0;
+        this.carrinho = carrinho;
         this.status = "aberta";
         this.recibo = null;
         this.pagamento = null;
-        this.carrinho = carrinho;
+        recalcularTotal();
     }
 
     public int getId() {
@@ -30,31 +33,46 @@ public class Venda {
     }
 
     public double getTotal() {
-        return total;
+        recalcularTotal();
+        return this.total;
+    }
+
+    public void recalcularTotal() {
+        double subtotal = carrinho.calcularSubtotal();
+        this.total = Math.max(subtotal - desconto, 0.0);
+    }
+
+    public double getDesconto(){
+        return desconto;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public Pagamento getPagamento(){
+        return pagamento;
+    }
+
     public Carrinho getCarrinho() {
         return carrinho;
     }
 
-    /** + aplicarDesconto(valor: double): void */
     public void aplicarDesconto(double valor) {
-        double subtotal = carrinho.calcularSubtotal();
-        this.total = Math.max(subtotal - valor, 0.0);
-        System.out.printf("[OK] Desconto de R$ %.2f aplicado. Novo total: R$ %.2f%n", valor, total);
+        if (valor < 0) {
+            System.out.println("[ERRO] O desconto não pode ser negativo.");
+            return;
+        }
+        this.desconto = valor;
+        recalcularTotal();
+        System.out.printf("[OK] Desconto de R$ %.2f aplicado. Novo total: R$ %.2f%n", valor, this.total);
     }
 
-    /** + registrarPagamento(Pagamento): void */
     public void registrarPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
         System.out.println("[OK] Pagamento registrado na venda #" + id + ".");
     }
 
-    /** + emitirRecibo(Recibo): void */
     public void emitirRecibo() {
         if (pagamento == null || !pagamento.getStatus()) {
             System.out.println("[ERRO] Não é possível emitir recibo sem pagamento aprovado.");
@@ -66,12 +84,11 @@ public class Venda {
             System.out.printf("%s x%d = R$ %.2f%n",
                     item.getProduto().getNome(), item.getQuantidade(), item.calcularSubtotal());
         }
-        System.out.printf("TOTAL: R$ %.2f%n", total);
+        System.out.printf("TOTAL: R$ %.2f%n", getTotal());
         System.out.println("Forma de pagamento: " + pagamento.getFormaPagamento());
         System.out.println("---------------------------\n");
     }
 
-    /** + finalizarVenda(): void */
     public void finalizarVenda() {
         if (this.total == 0.0) {
             this.total = carrinho.calcularSubtotal();

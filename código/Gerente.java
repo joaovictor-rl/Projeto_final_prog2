@@ -10,7 +10,6 @@ public class Gerente extends Usuario {
         this.administrador = administrador;
     }
 
-    /** + emitirRelatorioVendas(): void */
     public void emitirRelatorioVendas(List<Venda> vendas) {
         System.out.println("\n===== Relatório de Vendas (Gerente: " + nome + ") =====");
         double totalGeral = 0.0;
@@ -23,7 +22,6 @@ public class Gerente extends Usuario {
         System.out.println("=========================================================\n");
     }
 
-    /** + cadastrarFuncionario(Funcionario): void */
     public void cadastrarFuncionario(OperadorCaixa funcionario) {
         System.out.println("[OK] Funcionário " + funcionario.getNome() + " cadastrado por " + nome + ".");
     }
