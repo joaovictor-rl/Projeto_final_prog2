@@ -1,6 +1,6 @@
 # Projeto Final — Programação de Computadores II (2026.2)
 
-
+![PDV Mercado](aux/PDV_Mercado.png)
 
 Sistema de **caixa/mercado (PDV)** em Java, desenvolvido em console, aplicando os conceitos de Programação Orientada a Objetos trabalhados na disciplina: herança, interfaces, encapsulamento e composição entre classes.
 
