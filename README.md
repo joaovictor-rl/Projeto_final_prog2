@@ -45,25 +45,30 @@ bash executar.sh
 ## Estrutura do projeto
 
 ```
-Projeto_final_prog2/
-├── código/
-│   ├── Main.java            — Ponto de entrada e menus do sistema (login, gerente, operador)
-│   ├── Usuario.java         — Classe abstrata base para os usuários do sistema
-│   ├── Gerente.java         — Usuário com permissões administrativas
-│   ├── OperadorCaixa.java   — Usuário responsável pelas vendas
-│   ├── Empresa.java         — Gerencia o catálogo de produtos e o estoque
-│   ├── Produto.java         — Representa um produto do mercado
-│   ├── Carrinho.java        — Carrinho de compras de uma venda
-│   ├── ItemCarrinho.java    — Item (produto + quantidade) dentro do carrinho
-│   ├── Venda.java           — Registro de uma venda (total, desconto, status, recibo)
-│   ├── Pagamento.java       — Dados de um pagamento (forma, valor, status)
-│   ├── FormaPagamento.java  — Interface implementada pelas formas de pagamento
-│   ├── Cartao.java          — Pagamento via cartão de crédito/débito
-│   ├── Pix.java             — Pagamento via Pix
-│   └── Dinheiro.java        — Pagamento em dinheiro, com cálculo de troco
-├── diagramas/
-│   └── Diagrama_Sequencia_Venda.png  — Diagrama de sequência do fluxo de venda
-└── README.md
+src/
+└── mercado/
+    ├── app/
+    │   ├── Main.java
+    │   └── DadosDemo.java
+    ├── menu/
+    │   ├── Menu.java
+    │   └── Utilitarios.java
+    ├── modelo/
+    │   ├── Produto.java
+    │   ├── Empresa.java
+    │   ├── Carrinho.java
+    │   ├── ItemCarrinho.java
+    │   └── Venda.java
+    ├── usuario/
+    │   ├── Usuario.java
+    │   ├── Gerente.java
+    │   └── OperadorCaixa.java
+    └── pagamento/
+        ├── FormaPagamento.java
+        ├── Pagamento.java
+        ├── Cartao.java
+        ├── Pix.java
+        └── Dinheiro.java
 ```
 
 ## Modelagem (POO)
