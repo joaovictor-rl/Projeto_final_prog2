@@ -1,0 +1,72 @@
+package mercado.modelo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Carrinho {
+    private static int proximoId = 1;
+
+    private int id;
+    private List<ItemCarrinho> listaItens;
+
+    public Carrinho() {
+        this.id = proximoId++;
+        this.listaItens = new ArrayList<>();
+    }
+
+    public List<ItemCarrinho> getListaItens() {
+        return listaItens;
+    }
+
+    public void adicionarItem(Produto produto, int quantidade) {
+        for (ItemCarrinho item : listaItens) {
+            if (item.getProduto() == produto) {
+                item.incrementarQuantidade(quantidade);
+                System.out.println("[OK] Quantidade de '" + produto.getNome() + "' atualizada no carrinho.");
+                return;
+            }
+        }
+        listaItens.add(new ItemCarrinho(produto, quantidade));
+        System.out.println("[OK] '" + produto.getNome() + "' adicionado ao carrinho (x" + quantidade + ").");
+    }
+
+    public void removerItem(Produto produto) {
+        for (ItemCarrinho item : new ArrayList<>(listaItens)) {
+            if (item.getProduto() == produto) {
+                listaItens.remove(item);
+                System.out.println("[OK] '" + produto.getNome() + "' removido do carrinho.");
+                return;
+            }
+        }
+        System.out.println("[ERRO] '" + produto.getNome() + "' não está no carrinho.");
+    }
+
+    public void atualizarQuantidadeItem(Produto produto, int novaQuantidade) {
+        for (ItemCarrinho item : new ArrayList<>(listaItens)) {
+            if (item.getProduto() == produto) {
+                if (novaQuantidade <= 0) {
+                    listaItens.remove(item);
+                    System.out.println("[OK] '" + produto.getNome() + "' removido do carrinho (quantidade zerada).");
+                } else {
+                    item.atualizarQuantidade(novaQuantidade);
+                    System.out.println("[OK] Quantidade de '" + produto.getNome() + "' atualizada para " + novaQuantidade + ".");
+                }
+                return;
+            }
+        }
+        System.out.println("[ERRO] '" + produto.getNome() + "' não está no carrinho.");
+    }
+
+    public double calcularSubtotal() {
+        double total = 0.0;
+        for (ItemCarrinho item : listaItens) {
+            total += item.calcularSubtotal();
+        }
+        return total;
+    }
+
+    public void esvaziarCarrinho() {
+        listaItens.clear();
+        System.out.println("[OK] Carrinho esvaziado.");
+    }
+}
