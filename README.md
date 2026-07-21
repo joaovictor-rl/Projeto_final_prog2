@@ -8,7 +8,7 @@ O sistema simula o dia a dia de um pequeno mercado: gerentes cadastram produtos 
 
 ## Como compilar e executar
 
-Com o java instalado, abra o terminal na pasta `PDVMercado` e execute (utilize o Git Bash no Windows):
+Com o java instalado, abra o terminal na pasta `sistema_mercado` e execute (utilize o Git Bash no Windows):
 
 ```bash
 mkdir -p bin
