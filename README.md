@@ -13,7 +13,7 @@ Com o java instalado, abra o terminal na pasta `PDVMercado` e execute (utilize o
 ```bash
 mkdir -p bin
 javac -encoding UTF-8 -d bin $(find src -name "*.java")
-java -cp bin Main
+java -cp bin mercado.app.Main
 ```
 
 ## Funcionalidades
